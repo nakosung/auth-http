@@ -1,0 +1,16 @@
+doctype html
+html(lang="kr")
+	body
+		- if (everyauth && !everyauth.loggedIn)
+			h1 Hello Guest
+			#github-login
+				p
+					a.btn-auth.btn-github.large(href='/auth/github') GitHub 계정으로!
+		- else if (everyauth)
+			h1 Hello User #{everyauth.github.user.name}
+			img(src="#{everyauth.github.user.avatar_url}")
+			div
+				a(href="/logout",target="_self")
+					span Logout
+		- else
+			h1 No everyauth
