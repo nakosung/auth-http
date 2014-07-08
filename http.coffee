@@ -69,4 +69,7 @@ app.set 'views', path.join __dirname, 'views'
 app.get '/', (req,res) ->
 	res.render 'home'
 
+app.get '/ping', (req,res) ->
+	res.send 'OK'
+
 app.listen 3000
