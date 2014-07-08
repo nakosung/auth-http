@@ -5,7 +5,15 @@ everyauth = require 'everyauth'
 mongojs = require 'mongojs'
 path = require 'path'
 
-conf = require './conf'
+conf = 
+	COOKIE_MAX_AGE : parseInt(process.env.COOKIE_MAX_AGE or 7 * 24 * 3600)
+	COOKIE_SECRET : process.env.COOKIE_SECRET or 'cookie_super_secret'
+	SESSION_MONGO_HOST : process.env.MONGO_IP
+	SESSION_MONGO_DB : process.env.SESSION_DB or 'websession'
+	USERS_MONGO_DB : [process.env.MONGO_IP, process.env.USER_DB or 'auth'].join('/')
+	GITHUB :
+		APP_ID : process.env.GITHUB_APPID
+		APP_SECRET : process.env.GITHUB_SECRET
 
 db = mongojs conf.USERS_MONGO_DB, ['users']
 
